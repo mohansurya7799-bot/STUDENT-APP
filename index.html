@@ -7,101 +7,82 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Background image -->
+  <div class="background"></div>
+
   <!-- Login Page -->
-  <div id="loginPage" class="page active">
-    <h1>📚 Welcome to Student App</h1>
-    <div class="login-box">
-      <label>Login as:</label>
-      <select id="roleSelect">
-        <option value="student">Student</option>
-        <option value="teacher">Teacher</option>
-      </select>
-      <input type="text" id="username" placeholder="Enter your name">
-      <button onclick="login()">Login</button>
-    </div>
+  <div id="loginPage" class="centered-card">
+    <h2>Login / Signup</h2>
+    <input type="text" id="username" placeholder="Enter your name">
+    <select id="role">
+      <option value="student">Student</option>
+      <option value="teacher">Teacher</option>
+    </select>
+    <button onclick="login()">Login</button>
   </div>
 
-  <!-- Dashboard -->
-  <div id="dashboard" class="page">
+  <!-- Main App -->
+  <div id="app" class="hidden">
+    <!-- Header -->
     <header>
-      <div class="left">📖 Student App</div>
+      <div class="left">📚 Student App</div>
       <div class="right">
-        <span id="userDetails"></span>
-        <span id="notificationIcon" onclick="openSection('notifications')">🔔</span>
-        <button id="logoutBtn" onclick="logout()">Logout</button>
+        <span id="loginDetails"></span>
+        <button onclick="logout()">Logout</button>
+        <span id="notificationBell" onclick="openSection('notifications')">🔔</span>
       </div>
     </header>
 
+    <!-- Sidebar -->
     <aside>
-      <ul>
-        <li onclick="openSection('classes')">📖 Classes</li>
-        <li onclick="openSection('attendance')">📅 Attendance</li>
-        <li onclick="openSection('homework')">📝 Homework</li>
-        <li onclick="openSection('videos')">🎥 Videos</li>
-        <li onclick="openSection('exams')">📑 Exams</li>
-        <li onclick="openSection('marks')">📊 Marks</li>
-        <li onclick="openSection('notifications')">🔔 Notifications</li>
-      </ul>
+      <button onclick="openSection('classes')">Classes</button>
+      <button onclick="openSection('attendance')">Attendance</button>
+      <button onclick="openSection('videos')">Videos</button>
+      <button onclick="openSection('exams')">Exams</button>
+      <button onclick="openSection('marks')">Marks</button>
+      <button onclick="openSection('notifications')">Notifications</button>
     </aside>
 
+    <!-- Content -->
     <main>
-      <!-- Classes -->
-      <section id="classes" class="content-section">
-        <h2>Classes (1 - 10)</h2>
-        <ul id="classList"></ul>
+      <section id="classes" class="hidden">
+        <h2>Classes</h2>
+        <div id="classList"></div>
       </section>
 
-      <!-- Attendance -->
-      <section id="attendance" class="content-section">
+      <section id="attendance" class="hidden">
         <h2>Attendance</h2>
         <div id="calendar"></div>
       </section>
 
-      <!-- Homework -->
-      <section id="homework" class="content-section">
-        <h2>Homework</h2>
-        <div id="homeworkList"></div>
-        <div id="homeworkUpload" class="teacher-only">
-          <textarea id="homeworkText" placeholder="Enter homework"></textarea>
-          <button onclick="uploadHomework()">Upload Homework</button>
-        </div>
-      </section>
-
-      <!-- Videos -->
-      <section id="videos" class="content-section">
+      <section id="videos" class="hidden">
         <h2>Videos</h2>
-        <div id="videoList"></div>
-        <div id="videoUpload" class="teacher-only">
-          <input type="file" id="videoFile" accept="video/*">
+        <div id="videoUploads"></div>
+        <div id="videoUploadForm" class="hidden">
+          <input type="file" id="videoFile">
           <button onclick="uploadVideo()">Upload Video</button>
         </div>
       </section>
 
-      <!-- Exams -->
-      <section id="exams" class="content-section">
+      <section id="exams" class="hidden">
         <h2>Exams</h2>
-        <div id="examList"></div>
-        <div id="examUpload" class="teacher-only">
-          <input type="text" id="examName" placeholder="Exam name">
-          <input type="date" id="examDate">
-          <input type="file" id="examPaper" accept=".pdf,.jpg,.png">
+        <div id="examUploads"></div>
+        <div id="examUploadForm" class="hidden">
+          <input type="file" id="examFile">
           <button onclick="uploadExam()">Upload Exam</button>
         </div>
       </section>
 
-      <!-- Marks -->
-      <section id="marks" class="content-section">
+      <section id="marks" class="hidden">
         <h2>Marks</h2>
         <div id="marksList"></div>
-        <div id="marksUpload" class="teacher-only">
-          <input type="text" id="marksStudent" placeholder="Student name">
-          <input type="number" id="marksValue" placeholder="Marks">
+        <div id="marksUploadForm" class="hidden">
+          <input type="text" id="studentMark" placeholder="Student Name - Marks">
           <button onclick="uploadMarks()">Upload Marks</button>
         </div>
       </section>
 
-      <!-- Notifications -->
-      <section id="notifications" class="content-section">
+      <section id="notifications" class="hidden">
         <h2>Notifications</h2>
         <ul id="notificationList"></ul>
       </section>
