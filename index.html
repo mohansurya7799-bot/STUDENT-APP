@@ -16,7 +16,7 @@
       <option value="student">Student</option>
       <option value="teacher">Teacher</option>
     </select>
-    <button onclick="login()">Login</button>
+    <button id="loginBtn">Login</button>
   </div>
 
   <!-- App Page -->
@@ -26,7 +26,7 @@
       <div class="left">📚 Student App</div>
       <div class="right">
         <span id="loginDetails"></span>
-        <button onclick="logout()">Logout</button>
+        <button id="logoutBtn">Logout</button>
         <span id="notificationBell" onclick="openSection('notifications')">🔔</span>
       </div>
     </header>
@@ -43,46 +43,15 @@
 
     <!-- Main Content -->
     <main>
-      <!-- Classes -->
-      <section id="classes" class="hidden">
-        <h2>Classes</h2>
-        <div id="classList" class="card-container"></div>
-        <div id="classUploadForm" class="form-box hidden">
-          <input type="text" id="classTitle" placeholder="Enter class title">
-          <textarea id="classContent" placeholder="Enter class details"></textarea>
-          <button onclick="uploadClass()">Upload Class</button>
-        </div>
-      </section>
+      <section id="classes" class="hidden"><h2>Classes</h2></section>
+      <section id="attendance" class="hidden"><h2>Attendance</h2></section>
+      <section id="videos" class="hidden"><h2>Videos</h2></section>
+      <section id="exams" class="hidden"><h2>Exams</h2></section>
+      <section id="marks" class="hidden"><h2>Marks</h2></section>
+      <section id="notifications" class="hidden"><h2>Notifications</h2></section>
+    </main>
+  </div>
 
-      <!-- Attendance -->
-      <section id="attendance" class="hidden">
-        <h2>Attendance</h2>
-        <div id="calendar"></div>
-      </section>
-
-      <!-- Videos -->
-      <section id="videos" class="hidden">
-        <h2>Videos</h2>
-        <div id="videoUploads" class="card-container"></div>
-        <div id="videoUploadForm" class="form-box hidden">
-          <input type="file" id="videoFile">
-          <button onclick="uploadVideo()">Upload Video</button>
-        </div>
-      </section>
-
-      <!-- Exams -->
-      <section id="exams" class="hidden">
-        <h2>Exams</h2>
-        <div id="examUploads" class="card-container"></div>
-        <div id="examUploadForm" class="form-box hidden">
-          <input type="file" id="examFile">
-          <button onclick="uploadExam()">Upload Exam</button>
-        </div>
-      </section>
-
-      <!-- Marks -->
-      <section id="marks" class="hidden">
-        <h2>Marks</h2>
-        <div id="marksList" class="card-container"></div>
-        <div id="marksUploadForm" class="form-box hidden">
-          <input type="text" id
+  <script src="script.js"></script>
+</body>
+</html>
