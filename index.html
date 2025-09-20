@@ -7,10 +7,8 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Background -->
-  <div class="background"></div>
 
-  <!-- Login -->
+  <!-- Login Page -->
   <div id="loginPage" class="centered-card">
     <h2>Login / Signup</h2>
     <input type="text" id="username" placeholder="Enter your name">
@@ -21,7 +19,7 @@
     <button onclick="login()">Login</button>
   </div>
 
-  <!-- Main App -->
+  <!-- App Page -->
   <div id="app" class="hidden">
     <!-- Header -->
     <header>
@@ -35,21 +33,56 @@
 
     <!-- Sidebar -->
     <aside>
-      <button onclick="openSection('classes')">Classes</button>
-      <button onclick="openSection('attendance')">Attendance</button>
-      <button onclick="openSection('videos')">Videos</button>
-      <button onclick="openSection('exams')">Exams</button>
-      <button onclick="openSection('marks')">Marks</button>
-      <button onclick="openSection('notifications')">Notifications</button>
+      <button onclick="openSection('classes')">📖 Classes</button>
+      <button onclick="openSection('attendance')">📊 Attendance</button>
+      <button onclick="openSection('videos')">🎥 Videos</button>
+      <button onclick="openSection('exams')">📝 Exams</button>
+      <button onclick="openSection('marks')">📈 Marks</button>
+      <button onclick="openSection('notifications')">🔔 Notifications</button>
     </aside>
 
-    <!-- Content -->
+    <!-- Main Content -->
     <main>
       <!-- Classes -->
       <section id="classes" class="hidden">
-        <h2>📖 Classes</h2>
+        <h2>Classes</h2>
         <div id="classList" class="card-container"></div>
-        <div id="classUploadForm" class="hidden form-box">
-          <input type="text" id="classTitle" placeholder="Class Title">
-          <textarea id="classContent" placeholder="Class Details"></textarea>
-          <button onclick
+        <div id="classUploadForm" class="form-box hidden">
+          <input type="text" id="classTitle" placeholder="Enter class title">
+          <textarea id="classContent" placeholder="Enter class details"></textarea>
+          <button onclick="uploadClass()">Upload Class</button>
+        </div>
+      </section>
+
+      <!-- Attendance -->
+      <section id="attendance" class="hidden">
+        <h2>Attendance</h2>
+        <div id="calendar"></div>
+      </section>
+
+      <!-- Videos -->
+      <section id="videos" class="hidden">
+        <h2>Videos</h2>
+        <div id="videoUploads" class="card-container"></div>
+        <div id="videoUploadForm" class="form-box hidden">
+          <input type="file" id="videoFile">
+          <button onclick="uploadVideo()">Upload Video</button>
+        </div>
+      </section>
+
+      <!-- Exams -->
+      <section id="exams" class="hidden">
+        <h2>Exams</h2>
+        <div id="examUploads" class="card-container"></div>
+        <div id="examUploadForm" class="form-box hidden">
+          <input type="file" id="examFile">
+          <button onclick="uploadExam()">Upload Exam</button>
+        </div>
+      </section>
+
+      <!-- Marks -->
+      <section id="marks" class="hidden">
+        <h2>Marks</h2>
+        <div id="marksList" class="card-container"></div>
+        <div id="marksUploadForm" class="form-box hidden">
+          <input type="text" id

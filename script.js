@@ -1,9 +1,8 @@
 let currentUser = null;
-let notifications = [];
 
 // Login
 function login() {
-  const name = document.getElementById("username").value;
+  const name = document.getElementById("username").value.trim();
   const role = document.getElementById("role").value;
 
   if (!name) {
@@ -16,6 +15,7 @@ function login() {
   document.getElementById("loginPage").classList.add("hidden");
   document.getElementById("app").classList.remove("hidden");
 
+  // Enable teacher upload forms
   if (role === "teacher") {
     document.getElementById("classUploadForm").classList.remove("hidden");
     document.getElementById("videoUploadForm").classList.remove("hidden");
@@ -24,6 +24,7 @@ function login() {
   }
 
   generateCalendar();
+  openSection('classes'); // default open
 }
 
 // Logout
@@ -39,7 +40,7 @@ function openSection(id) {
   document.getElementById(id).classList.remove("hidden");
 }
 
-// === CLASSES ===
+// ==================== CLASSES ====================
 function uploadClass() {
   let title = document.getElementById("classTitle").value;
   let content = document.getElementById("classContent").value;
@@ -56,42 +57,69 @@ function uploadClass() {
   }
 }
 
-// === ATTENDANCE ===
+// ==================== ATTENDANCE ====================
 function generateCalendar() {
   let cal = document.getElementById("calendar");
   cal.innerHTML = "";
   for (let day = 1; day <= 30; day++) {
     let div = document.createElement("div");
     div.innerText = day;
+
     if (currentUser.role === "teacher") {
       div.onclick = () => {
-        div.style.background = div.style.background === "green"
-          ? "rgba(255,255,255,0.2)"
-          : "green";
+        div.classList.toggle("marked");
       };
     }
     cal.appendChild(div);
   }
 }
 
-// === VIDEOS ===
+// ==================== VIDEOS ====================
 function uploadVideo() {
   let file = document.getElementById("videoFile").files[0];
   if (file) {
     let div = document.createElement("div");
     div.className = "card";
-    div.innerHTML = `🎞️ ${file.name} <br><small>Uploaded by ${currentUser.name}</small>`;
+    div.innerHTML = `<b>${file.name}</b><br><small>Uploaded by ${currentUser.name}</small>`;
     document.getElementById("videoUploads").appendChild(div);
 
     addNotification("videos", `New video uploaded: ${file.name}`);
   }
 }
 
-// === EXAMS ===
+// ==================== EXAMS ====================
 function uploadExam() {
   let file = document.getElementById("examFile").files[0];
   if (file) {
     let div = document.createElement("div");
     div.className = "card";
-    div.innerHTML = `📝 ${file.name} <br><small>Uploaded by ${currentUser.name}</small>`;
-    document.getElementById("examUploa
+    div.innerHTML = `<b>${file.name}</b><br><small>Uploaded by ${currentUser.name}</small>`;
+    document.getElementById("examUploads").appendChild(div);
+
+    addNotification("exams", `New exam uploaded: ${file.name}`);
+  }
+}
+
+// ==================== MARKS ====================
+function uploadMarks() {
+  let mark = document.getElementById("studentMark").value;
+  if (mark) {
+    let div = document.createElement("div");
+    div.className = "card";
+    div.innerText = `${mark} (Uploaded by ${currentUser.name})`;
+    document.getElementById("marksList").appendChild(div);
+
+    addNotification("marks", `Marks updated: ${mark}`);
+    document.getElementById("studentMark").value = "";
+  }
+}
+
+// ==================== NOTIFICATIONS ====================
+function addNotification(section, text) {
+  let li = document.createElement("li");
+  li.innerText = text;
+  li.onclick = () => {
+    openSection(section);
+  };
+  document.getElementById("notificationList").appendChild(li);
+}
