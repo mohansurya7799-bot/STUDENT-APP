@@ -1,103 +1,104 @@
-:root{
-  --bg:#0f0f10;
-  --panel:#181819;
-  --muted:#9aa0a6;
-  --accent:#0b84ff;
-  --card:#151516;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background:var(--bg);
-  color:#e7e7e7;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  min-height:100vh;
+/* General */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #89f7fe, #66a6ff);
+  color: white;
 }
 
-/* Topbar */
-.topbar{
-  position:fixed; left:0; right:0; top:0;
-  height:64px;
-  display:flex; align-items:center; justify-content:space-between;
-  padding:8px 14px;
-  background:linear-gradient(180deg,var(--panel), #111111);
-  border-bottom:1px solid rgba(255,255,255,0.03);
-  z-index:50;
+.page {
+  display: none;
+  text-align: center;
+  padding: 20px;
 }
-.top-left{display:flex; align-items:center; gap:8px}
-.top-right{display:flex; align-items:center; gap:10px}
-#class-select, #attendance-date{
-  background:#222; color:#fff; border:1px solid #2a2a2a; padding:8px 10px; border-radius:6px;
+
+.page.active {
+  display: block;
 }
-.icon-btn{background:transparent; border:0; color:#e7e7e7; font-size:18px; padding:8px; border-radius:8px; cursor:pointer}
-.icon-btn:hover{background:rgba(255,255,255,0.02)}
-.primary-btn{background:var(--accent); color:#fff; border:0; padding:8px 10px; border-radius:8px; cursor:pointer}
-.user-info{padding:6px 10px; background:transparent; border-radius:6px; color:var(--muted); font-weight:600}
 
-/* App Layout */
-.app{display:flex; margin-top:64px; min-height:calc(100vh - 64px);}
-.sidebar{
-  width:180px; background:var(--panel); padding:12px; border-right:1px solid rgba(255,255,255,0.02);
-  display:flex; flex-direction:column; gap:8px;
+/* Login */
+.login-box {
+  margin-top: 20px;
+  background: rgba(0,0,0,0.6);
+  padding: 20px;
+  border-radius: 12px;
+  display: inline-block;
 }
-.side-btn{display:flex; gap:10px; align-items:center; padding:10px; border-radius:8px; background:#141414; color:#fff; border:0; cursor:pointer; text-align:left}
-.side-btn i{font-size:18px}
-.side-btn:hover{background:rgba(255,255,255,0.03)}
-.side-btn span{display:inline-block}
 
-/* Main */
-.main{flex:1; padding:18px; overflow:auto}
-.section{display:none}
-.section.active{display:block}
-h2{margin:0 0 14px 0}
-
-/* Cards & lists */
-.card-list{display:flex; flex-direction:column; gap:10px}
-.card{
-  background:var(--card); padding:12px; border-radius:10px; border:1px solid rgba(255,255,255,0.02)
+.login-box input, .login-box select, .login-box button {
+  display: block;
+  margin: 10px auto;
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
 }
-.card .meta{color:var(--muted); font-size:13px}
 
-/* Forms */
-.card-form, .auth-form{display:flex; flex-direction:column; gap:8px; margin-top:10px}
-input, select, textarea{
-  background:#222; color:#fff; border:1px solid #2a2a2a; padding:8px; border-radius:8px; outline:none;
+/* Dashboard */
+header {
+  display: flex;
+  justify-content: space-between;
+  background: #222;
+  padding: 10px;
+  align-items: center;
 }
-textarea{min-height:80px; resize:vertical}
 
-/* Attendance layout */
-.attendance-panel{display:flex; gap:16px; flex-wrap:wrap}
-.calendar{width:320px; max-width:100%; background:var(--card); padding:12px; border-radius:8px}
-.calendar .month{display:flex; justify-content:space-between; align-items:center; margin-bottom:8px}
-.calendar-grid{display:grid; grid-template-columns:repeat(7,1fr); gap:6px}
-.calendar-cell{padding:8px; background:#121212; border-radius:6px; text-align:center; cursor:pointer; border:1px solid transparent}
-.calendar-cell:hover{border-color:rgba(255,255,255,0.04)}
-.calendar-cell.today{box-shadow:0 0 0 2px rgba(11,132,255,0.12)}
-.calendar-cell.selected{background:var(--accent); color:#fff}
+header .right {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
 
-/* Table */
-table{width:100%; border-collapse:collapse; margin-top:8px}
-th,td{padding:8px; border-bottom:1px dashed rgba(255,255,255,0.03); text-align:left}
-.action-btn{background:transparent;border:0;color:var(--muted); cursor:pointer}
+#logoutBtn {
+  background: #ff4b5c;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
 
-/* Modal */
-.modal{position:fixed; inset:0; display:flex; justify-content:center; align-items:center; background:rgba(0,0,0,0.6); z-index:60}
-.modal-card{background:var(--panel); padding:18px; border-radius:12px; width:95%; max-width:420px; border:1px solid rgba(255,255,255,0.03)}
-.tabs{display:flex; gap:8px; margin-bottom:8px}
-.tabs button{padding:8px 10px; border-radius:8px; border:0; cursor:pointer}
-.tabs button.active{background:var(--accent); color:#fff}
+aside {
+  width: 200px;
+  background: #111;
+  position: fixed;
+  top: 50px;
+  bottom: 0;
+  left: 0;
+  padding-top: 20px;
+}
 
-/* small helpers */
-.hidden{display:none}
-.badge{background:#ff3b30; color:#fff; padding:2px 6px; border-radius:10px; font-size:12px; margin-left:6px}
+aside ul {
+  list-style: none;
+  padding: 0;
+}
 
-/* responsive */
-@media (max-width:900px){
-  .sidebar{width:64px}
-  .side-btn span{display:none}
-  .calendar{width:100%}
-  .attendance-panel{flex-direction:column}
-  .top-left{gap:6px}
+aside ul li {
+  padding: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+aside ul li:hover {
+  background: #333;
+}
+
+main {
+  margin-left: 220px;
+  padding: 20px;
+}
+
+.content-section {
+  display: none;
+}
+
+.content-section.active {
+  display: block;
+}
+
+/* Teacher-only */
+.teacher-only {
+  margin-top: 15px;
+  padding: 10px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
 }

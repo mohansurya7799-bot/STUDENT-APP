@@ -1,175 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Student App - Dark Theme Prototype</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student App</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Topbar -->
-  <header class="topbar">
-    <div class="top-left">
-      <select id="class-select" aria-label="Select Class"></select>
-      <div id="calendar-mini"></div>
-      <button id="prev-month" class="icon-btn" title="Previous month"><i class='bx bx-chevron-left'></i></button>
-      <button id="next-month" class="icon-btn" title="Next month"><i class='bx bx-chevron-right'></i></button>
+  <!-- Login Page -->
+  <div id="loginPage" class="page active">
+    <h1>📚 Welcome to Student App</h1>
+    <div class="login-box">
+      <label>Login as:</label>
+      <select id="roleSelect">
+        <option value="student">Student</option>
+        <option value="teacher">Teacher</option>
+      </select>
+      <input type="text" id="username" placeholder="Enter your name">
+      <button onclick="login()">Login</button>
     </div>
+  </div>
 
-    <div class="top-right">
-      <button id="notif-bell" class="icon-btn" title="Notifications"><i class='bx bx-bell'></i><span id="notif-count" class="badge">0</span></button>
-      <div id="user-info" class="user-info">Not logged</div>
-      <button id="logout" class="primary-btn" style="display:none">Logout</button>
-    </div>
-  </header>
+  <!-- Dashboard -->
+  <div id="dashboard" class="page">
+    <header>
+      <div class="left">Student App</div>
+      <div class="right">
+        <span id="userDetails"></span>
+        <button id="logoutBtn" onclick="logout()">Logout</button>
+        <span id="notificationIcon" onclick="openSection('notifications')">🔔</span>
+      </div>
+    </header>
 
-  <!-- Layout -->
-  <div class="app">
-    <!-- Sidebar -->
-    <nav class="sidebar">
-      <button onclick="showSection('classes')" class="side-btn"><i class='bx bx-book'></i><span>Classes</span></button>
-      <button onclick="showSection('attendance')" class="side-btn"><i class='bx bx-calendar'></i><span>Attendance</span></button>
-      <button onclick="showSection('exams')" class="side-btn"><i class='bx bx-edit-alt'></i><span>Exams/Marks</span></button>
-      <button onclick="showSection('homework')" class="side-btn"><i class='bx bx-task'></i><span>Homework</span></button>
-      <button onclick="showSection('videos')" class="side-btn"><i class='bx bx-video'></i><span>Videos</span></button>
-    </nav>
+    <aside>
+      <ul>
+        <li onclick="openSection('classes')">📖 Classes</li>
+        <li onclick="openSection('attendance')">📅 Attendance</li>
+        <li onclick="openSection('homework')">📝 Homework</li>
+        <li onclick="openSection('videos')">🎥 Videos</li>
+        <li onclick="openSection('exams')">📑 Exams</li>
+        <li onclick="openSection('marks')">📊 Marks</li>
+        <li onclick="openSection('notifications')">🔔 Notifications</li>
+      </ul>
+    </aside>
 
-    <!-- Main -->
-    <main class="main">
+    <main>
       <!-- Classes -->
-      <section id="classes" class="section">
-        <h2>Classes</h2>
-        <div id="class-list" class="card-list"></div>
-
-        <div id="class-upload" class="card card-form hidden">
-          <h3>Add Class</h3>
-          <input id="class-title" placeholder="Class title (e.g., Class 5)" />
-          <button onclick="addClass()">Add</button>
-        </div>
+      <section id="classes" class="content-section">
+        <h2>Classes (1 - 10)</h2>
+        <ul id="classList"></ul>
       </section>
 
       <!-- Attendance -->
-      <section id="attendance" class="section">
-        <h2>Attendance — <span id="attendance-class-name">—</span></h2>
-
-        <div class="attendance-panel">
-          <div class="calendar" id="calendar-grid"></div>
-
-          <div class="attendance-right">
-            <div class="card">
-              <h3>Students</h3>
-              <table id="attendance-table">
-                <thead><tr><th>Student</th><th>Present</th><th>Actions</th></tr></thead>
-                <tbody id="attendance-body"></tbody>
-              </table>
-              <div class="card-form">
-                <input id="new-student-name" placeholder="New student name" />
-                <button onclick="addStudent()">Add Student</button>
-              </div>
-              <div class="card-form">
-                <button id="save-attendance" onclick="saveAttendance()" class="primary-btn">Save Attendance for Selected Date</button>
-              </div>
-            </div>
-            <div class="card">
-              <h3>Selected date</h3>
-              <div id="selected-date-display">None</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Exams/Marks -->
-      <section id="exams" class="section">
-        <h2>Exams / Marks</h2>
-        <div id="marks-list" class="card-list"></div>
-
-        <div id="marks-upload" class="card card-form hidden">
-          <h3>Upload / Edit Mark</h3>
-          <input id="mark-exam" placeholder="Exam name" />
-          <input id="mark-student" placeholder="Student name" />
-          <input id="mark-score" type="number" placeholder="Marks" />
-          <div>
-            <button onclick="uploadMark()">Save Mark</button>
-          </div>
-        </div>
+      <section id="attendance" class="content-section">
+        <h2>Attendance</h2>
+        <div id="calendar"></div>
       </section>
 
       <!-- Homework -->
-      <section id="homework" class="section">
+      <section id="homework" class="content-section">
         <h2>Homework</h2>
-        <div id="homework-list" class="card-list"></div>
-
-        <div id="homework-upload" class="card card-form hidden">
-          <h3>Add Homework</h3>
-          <input id="hw-title" placeholder="Homework title" />
-          <textarea id="hw-desc" placeholder="Description"></textarea>
-          <select id="hw-related-video">
-            <option value="">(No related video)</option>
-          </select>
-          <div>
-            <button onclick="addHomework()">Add Homework</button>
-          </div>
+        <div id="homeworkList"></div>
+        <div id="homeworkUpload" class="teacher-only">
+          <textarea id="homeworkText" placeholder="Enter homework"></textarea>
+          <input type="file" id="homeworkVideo" accept="video/*">
+          <button onclick="uploadHomework()">Upload Homework</button>
         </div>
       </section>
 
       <!-- Videos -->
-      <section id="videos" class="section">
+      <section id="videos" class="content-section">
         <h2>Videos</h2>
-        <div id="video-list" class="card-list"></div>
-
-        <div id="video-upload" class="card card-form hidden">
-          <h3>Upload Video</h3>
-          <input id="video-title" placeholder="Video title" />
-          <input id="video-file" type="file" accept="video/*" />
-          <div>
-            <button onclick="uploadVideo()">Upload from device</button>
-          </div>
+        <div id="videoList"></div>
+        <div id="videoUpload" class="teacher-only">
+          <input type="file" id="videoFile" accept="video/*">
+          <button onclick="uploadVideo()">Upload Video</button>
         </div>
       </section>
 
-      <!-- Notifications (hidden in sidebar but accessible) -->
-      <section id="notifications" class="section">
+      <!-- Exams -->
+      <section id="exams" class="content-section">
+        <h2>Exams</h2>
+        <div id="examList"></div>
+        <div id="examUpload" class="teacher-only">
+          <input type="text" id="examName" placeholder="Exam name">
+          <input type="date" id="examDate">
+          <input type="file" id="examPaper" accept=".pdf,.jpg,.png">
+          <button onclick="uploadExam()">Upload Exam</button>
+        </div>
+      </section>
+
+      <!-- Marks -->
+      <section id="marks" class="content-section">
+        <h2>Marks</h2>
+        <div id="marksList"></div>
+        <div id="marksUpload" class="teacher-only">
+          <input type="text" id="marksStudent" placeholder="Student name">
+          <input type="number" id="marksValue" placeholder="Marks">
+          <button onclick="uploadMarks()">Upload Marks</button>
+        </div>
+      </section>
+
+      <!-- Notifications -->
+      <section id="notifications" class="content-section">
         <h2>Notifications</h2>
-        <div id="notifications-list" class="card-list"></div>
+        <ul id="notificationList"></ul>
       </section>
     </main>
-  </div>
-
-  <!-- Login / Signup Modal -->
-  <div id="auth-modal" class="modal">
-    <div class="modal-card">
-      <h2>Welcome — Sign up / Login</h2>
-      <div class="tabs">
-        <button id="tab-signup" class="active">Sign Up</button>
-        <button id="tab-login">Login</button>
-      </div>
-
-      <div id="signup-form" class="auth-form">
-        <h3>Sign up</h3>
-        <select id="signup-role">
-          <option value="student">Student</option>
-          <option value="teacher">Teacher</option>
-        </select>
-        <input id="signup-name" placeholder="Full name" />
-        <input id="signup-email" placeholder="Email" />
-        <input id="signup-password" placeholder="Password" type="password" />
-        <button onclick="signup()">Sign up</button>
-      </div>
-
-      <div id="login-form" class="auth-form hidden">
-        <h3>Login</h3>
-        <select id="login-role">
-          <option value="student">Student</option>
-          <option value="teacher">Teacher</option>
-        </select>
-        <input id="login-email" placeholder="Email" />
-        <input id="login-password" placeholder="Password" type="password" />
-        <button onclick="login()">Login</button>
-      </div>
-
-      <div style="margin-top:12px;"><small><i>Demo data stored in browser localStorage.</i></small></div>
-    </div>
   </div>
 
   <script src="script.js"></script>
