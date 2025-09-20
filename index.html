@@ -24,11 +24,11 @@
   <!-- Dashboard -->
   <div id="dashboard" class="page">
     <header>
-      <div class="left">Student App</div>
+      <div class="left">📖 Student App</div>
       <div class="right">
         <span id="userDetails"></span>
-        <button id="logoutBtn" onclick="logout()">Logout</button>
         <span id="notificationIcon" onclick="openSection('notifications')">🔔</span>
+        <button id="logoutBtn" onclick="logout()">Logout</button>
       </div>
     </header>
 
@@ -63,7 +63,6 @@
         <div id="homeworkList"></div>
         <div id="homeworkUpload" class="teacher-only">
           <textarea id="homeworkText" placeholder="Enter homework"></textarea>
-          <input type="file" id="homeworkVideo" accept="video/*">
           <button onclick="uploadHomework()">Upload Homework</button>
         </div>
       </section>
