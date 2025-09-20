@@ -21,7 +21,7 @@
     <button onclick="login()">Login</button>
   </div>
 
-  <!-- App -->
+  <!-- Main App -->
   <div id="app" class="hidden">
     <!-- Header -->
     <header>
@@ -43,63 +43,13 @@
       <button onclick="openSection('notifications')">Notifications</button>
     </aside>
 
-    <!-- Main Content -->
+    <!-- Content -->
     <main>
       <!-- Classes -->
       <section id="classes" class="hidden">
-        <h2>Classes</h2>
-        <div id="classList"></div>
-        <div id="classUploadForm" class="hidden">
-          <input type="text" id="classTitle" placeholder="Enter class title">
-          <textarea id="classContent" placeholder="Enter class details"></textarea>
-          <button onclick="uploadClass()">Upload Class</button>
-        </div>
-      </section>
-
-      <!-- Attendance -->
-      <section id="attendance" class="hidden">
-        <h2>Attendance</h2>
-        <div id="calendar"></div>
-      </section>
-
-      <!-- Videos -->
-      <section id="videos" class="hidden">
-        <h2>Videos</h2>
-        <div id="videoUploads"></div>
-        <div id="videoUploadForm" class="hidden">
-          <input type="file" id="videoFile">
-          <button onclick="uploadVideo()">Upload Video</button>
-        </div>
-      </section>
-
-      <!-- Exams -->
-      <section id="exams" class="hidden">
-        <h2>Exams</h2>
-        <div id="examUploads"></div>
-        <div id="examUploadForm" class="hidden">
-          <input type="file" id="examFile">
-          <button onclick="uploadExam()">Upload Exam</button>
-        </div>
-      </section>
-
-      <!-- Marks -->
-      <section id="marks" class="hidden">
-        <h2>Marks</h2>
-        <div id="marksList"></div>
-        <div id="marksUploadForm" class="hidden">
-          <input type="text" id="studentMark" placeholder="Student Name - Marks">
-          <button onclick="uploadMarks()">Upload Marks</button>
-        </div>
-      </section>
-
-      <!-- Notifications -->
-      <section id="notifications" class="hidden">
-        <h2>Notifications</h2>
-        <ul id="notificationList"></ul>
-      </section>
-    </main>
-  </div>
-
-  <script src="script.js"></script>
-</body>
-</html>
+        <h2>📖 Classes</h2>
+        <div id="classList" class="card-container"></div>
+        <div id="classUploadForm" class="hidden form-box">
+          <input type="text" id="classTitle" placeholder="Class Title">
+          <textarea id="classContent" placeholder="Class Details"></textarea>
+          <button onclick
